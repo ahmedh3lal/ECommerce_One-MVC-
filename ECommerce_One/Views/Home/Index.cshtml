@@ -1,0 +1,93 @@
+﻿@model List<Category>
+
+<div class="carousel-container">
+    @foreach (var category in Model)
+
+    {
+        <a asp-action="Category" asp-route-id="@category.Id" class="btn btn-outline-success">
+        <h2>@category.Name</h2>
+
+        </a>
+
+        <!-- إعطاء معرف فريد للكاروسيل بناءً على اسم الفئة -->
+        <div class="carousel-wrapper">
+            <div class="carousel" id="carousel-@category.Name.Replace(" ", "")" data-current-index="0">
+                @foreach (var item in category.Products.Take(5)) 
+                {
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                         <div class="card">
+                        <img src="@item.ImageUrl" alt="@item.Name">
+                        <h5>Name: @item.Name</h5>
+                        <h5>Quentity: @item.Quentity</h5>
+                        <h5>Price: @item.Price</h5>
+                        <p>Price: @item.Description</p>
+                        </div>
+                        </a>
+                }
+            </div>
+
+            
+        </div>
+    }
+</div>
+
+
+<style>
+    .carousel-wrapper {
+        overflow: hidden;
+        width: calc(15rem * 5); /* عرض 5 بطاقات فقط */
+        margin: 0 auto;
+    }
+
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .card {
+        width: 15rem; /* عرض البطاقة */
+        margin: 0 10px;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .card h5 {
+            margin: 15px 0;
+        }
+
+    .button-container {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+    }
+
+    .prev, .next {
+        background-color: #444;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+    }
+
+        .prev:hover, .next:hover {
+            background-color: #666;
+        }
+
+</style>

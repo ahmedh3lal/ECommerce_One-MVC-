@@ -1,0 +1,73 @@
+﻿@model Product
+
+<form method="POST" enctype="multipart/form-data">
+
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Product" asp-for="Name" type="text" class="form-control" name="Name" id="" placeholder="Name of product" required>
+            <label for="firstName" class="form-label">Name of product</label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Product" asp-for="Price" type="text" class="form-control" name="Price" id="Price" placeholder="Price" required>
+            <label for="firstName" class="form-label">Price</label>
+            <span asp-validation-for="Price" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Product" asp-for="Quentity" type="text" class="form-control" name="Quentity" id="Quentity" placeholder="Quentity" required>
+            <label for="Quentity" class="form-label">Quentity</label>
+            <span asp-validation-for="Quentity" class="text-danger"></span>
+        </div>
+     </div>
+      <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Product" asp-for="CategoryId" type="text" class="form-control" name="CategoryId" id="CategoryId" placeholder="CategoryId" required>
+            <label for="CategoryId" class="form-label">CategoryId</label>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+     </div>
+
+      <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Product" asp-for="Description" type="text" class="form-control" name="Description" id="firstName" placeholder="Description" >
+            <label for="Description" class="form-label">Description</label>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+        </div>
+    </div>
+    
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Product" asp-for="formFile" type="file" onchange="loadfile(event)">
+            <img id="output" width="200px" height="200px" />
+        </div>
+    </div>
+    
+    <div class="col-12">
+        <div class="d-grid">
+            <button class="btn btn-dark btn-lg" type="submit">ADD</button>
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+    <script>
+        var loadfile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('output');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

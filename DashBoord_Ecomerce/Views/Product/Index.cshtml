@@ -1,0 +1,55 @@
+﻿@model List<Product>
+<div class="text-right">
+    <a class="btn btn-primary" asp-area="" asp-controller="Product" asp-action="Create" class="btn btn-success">Create New Product</a>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card d-flex flex-column">
+                    @if (item.ImageUrl != null)
+                    {
+                        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                    }
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Name: @item.Name</h5>
+                        <h5 class="card-title">Price: @item.Price</h5>
+                        <h5 class="card-title">Quentity: @item.Quentity</h5>
+                        <h5 class="card-title">Category ID: @item.CategoryId</h5>
+                        <p class="card-text">Description: @item.Description</p>
+                        <a asp-action="Details" asp-route-id="@item.Id" class=" btn btn-info">Details</a>
+                        <a asp-action="Update" class="btn btn-success" asp-route-id="@item.Id">Update</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class=" btn btn-danger">Delete</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-img-top {
+        width: 15rem; /* عرض الصورة */
+        height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+        object-fit: cover; /* ملاءمة الصورة داخل الإطار */
+    }
+    .text-right {
+    text-align: right;
+}
+
+</style>

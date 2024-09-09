@@ -1,0 +1,77 @@
+﻿@model Product
+
+<section class="bg-light p-3 p-md-4 p-xl-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xxl-11">
+                <div class="card border-light-subtle shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                            <img class="img-fluid rounded-start" loading="lazy" src="@Model.ImageUrl" alt="Product Image">
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-lg-11 col-xl-10">
+                                <div class="card-body p-3 p-md-4 p-xl-5">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-5">
+                                                <h2 class="h4 text-center">Information</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form>
+                                        <div class="row gy-3 overflow-hidden">
+                                            <div class="col-12">
+                                                <div class="form-floating mb-3">
+                                                    <input asp-controller="Product" asp-for="Name" type="text" class="form-control" name="Name" id="firstName" value="@Model.Name" readonly>
+                                                    <label for="Name" class="form-label">Name</label>
+                                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row gy-3 overflow-hidden">
+                                                <div class="col-12">
+                                                    <div class="form-floating mb-3">
+                                                        <input asp-controller="Product" asp-for="Price" type="text" class="form-control" name="Price" id="Price" readonly>
+                                                        <label for="Price" class="form-label">Price</label>
+                                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-floating mb-3">
+                                                        <input asp-controller="Product" asp-for="Quentity" type="text" class="form-control" name="Quentity" readonly>
+                                                        <label for="Quentity" class="form-label">Quantity</label>
+                                                        <span asp-validation-for="Quentity" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="d-grid gap-2">
+                                                    <a asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-lg">Buy</a>
+                                                </div>
+                                            </div>
+                                    </form>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="mb-0 mt-5 text-secondary text-center">Already have an account? <a asp-controller="User" asp-action="LOGIN">Sign in</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+        height: 30rem; /* تحديد الحد الأقصى لارتفاع الصورة */
+    }
+</style>
