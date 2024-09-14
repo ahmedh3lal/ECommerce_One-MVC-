@@ -31,6 +31,21 @@ public partial class User
     public string Number { get; set; }
 
     public byte[] ImageBytes { get; set; }
+    [NotMapped]
+    public IFormFile? formFile { get; set; }
+    [NotMapped]
+    public string ImageUrl
+    {
+        get
+        {
+            if (ImageBytes != null)
+            {
+                string base64 = Convert.ToBase64String(ImageBytes, 0, ImageBytes.Length);
+                return "data:image/png;base64," + base64;
+            }
+            return string.Empty;
+        }
+    }
 
     [InverseProperty("User")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

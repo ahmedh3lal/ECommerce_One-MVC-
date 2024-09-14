@@ -1,0 +1,32 @@
+﻿@model List<Order>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">UserId</th>
+            <th scope="col">ProductID</th>
+            <th scope="col">Quentity</th>
+            <th scope="col">PayId</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">DateTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            
+        <tr class="table-success">
+            
+            <td>@item.Id</td>
+            <td>@item.UserId</td>
+            <td>@item.ProductId</td>
+            <td>@item.Quentity</td>
+            <td>@item.PayId</td>
+            <td>@item.Total</td>
+            <td>@item.DateTime</td>
+            
+        </tr>
+        }
+        
+    </tbody>
+</table>

@@ -20,8 +20,13 @@
                                         </div>
                                     </div>
 
-
-                                    <form>
+                                    @if (ViewData.ModelState["Cust"] != null)
+                                    {
+                                        <div class="alert alert-danger">
+                                            @ViewData.ModelState["Cust"].Errors[0].ErrorMessage
+                                        </div>
+                                    }
+                                    <form method="POST" enctype="multipart/form-data">
 
                                         <div class="col-12">
                                             <div class="form-floating mb-3">
@@ -69,12 +74,13 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid gap-2">
-                                                <a asp-action="" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-lg">Buy</a>
+                                                <input type="submit" value="Buy" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-lg" ></input>
                                             </div>
                                         </div>
 
                                     </form>
 
+                                   
                                 </div>
                             </div>
                         </div>

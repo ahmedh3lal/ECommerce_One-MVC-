@@ -1,0 +1,21 @@
+﻿@model Category
+
+<form method="POST" enctype="multipart/form-data">
+
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input asp-controller="Category" asp-for="Name" type="text" class="form-control" name="Name" id="" placeholder="Name of Category" required>
+            <label for="Name" class="form-label">Name of Category</label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="d-grid">
+            <button class="btn btn-dark btn-lg" type="submit">ADD</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

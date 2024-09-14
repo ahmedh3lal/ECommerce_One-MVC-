@@ -1,6 +1,7 @@
 ﻿
 using ECommerce_One.Context;
 using ECommerce_One.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -21,9 +22,12 @@ namespace ECommerce_One.Controllers
         }
         public IActionResult Index(int id)
         {
-            Users res = _AppDbContext.users.FirstOrDefault(u => u.Id == id);
-            
-            return View(res);
+            Users users = _AppDbContext.users.FirstOrDefault(u => u.Id == id);
+            HttpContext.Session.SetString("SessionUserId", users.Id.ToString());
+            HttpContext.Session.SetString("SessionUserImage", users.ImageUrl);
+            HttpContext.Session.SetString("SessionUserName", users.Name);
+
+            return View(users);
         }
         public IActionResult LOGIN()
         {
@@ -32,17 +36,20 @@ namespace ECommerce_One.Controllers
         [HttpPost]
          public IActionResult LOGIN(Users? users)
         {
-            var res = _AppDbContext.users.FirstOrDefault((u => u.Email == users.Email));
+            Users ? res = _AppDbContext.users.FirstOrDefault((u => u.Email == users.Email));
             if(res== null)
             {
-                ModelState.AddModelError("cust Error", "Error tray agin invalid username or password");
+               
+                ModelState.AddModelError("Cust", "Error tray agin invalid username or password");
                 return View();
             }
             if(res.Password!=users.Password)
             {
-                ModelState.AddModelError("cust Error","Error tray agin invalid username or password");
+                ModelState.AddModelError("Cust", "Error tray agin invalid username or password");
                 return View();
             }
+           // users = _AppDbContext.users.FirstOrDefault(x => x.Id == users.Id);
+           
             int id=res.Id;
             return RedirectToAction("Index","User", new {id});
         }
@@ -95,7 +102,16 @@ namespace ECommerce_One.Controllers
             _AppDbContext.SaveChanges();
             return RedirectToAction("Index", "User",new { users.Id });
         }
-        
-        
+       
+        public async Task<IActionResult> Logout()
+        {
+            
+            await HttpContext.SignOutAsync();
+
+           
+            return RedirectToAction("LOGIN", "User");
+        }
+
+
     }
 }

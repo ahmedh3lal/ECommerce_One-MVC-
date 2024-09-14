@@ -1,6 +1,10 @@
 ﻿@model Users
-@{
-    
+
+@if (ViewData.ModelState["Cust"] != null)
+{
+    <div class="alert alert-danger">
+        @ViewData.ModelState["Cust"].Errors[0].ErrorMessage
+    </div>
 }
 <form method="post" align="center">
     <!-- Email input -->
@@ -27,10 +31,7 @@
             </div>
         </div>
 
-        <div class="col">
-            <!-- Simple link -->
-            <a href="#!">Forgot password?</a>
-        </div>
+       
     </div>
 
     <!-- Submit button -->
@@ -54,8 +55,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color:darkslategray ;
+        background-image: url('/Images/logo-img-1.jpg'); /* تعديل المسار إلى صورتك */
+        background-size: cover; /* لجعل الصورة تغطي كامل الصفحة */
+        background-position: center; /* لجعل الصورة تتمركز في منتصف الشاشة */
+        background-repeat: no-repeat; /* لمنع تكرار الصورة */
     }
+
 
     /* Container to hold the form, can be used to add additional styling if needed */
     .container {

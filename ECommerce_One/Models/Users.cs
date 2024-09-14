@@ -13,9 +13,9 @@ namespace ECommerce_One.Models
         public string Email { get; set; }
         [Required]
         [RegularExpression(@"^\d{7}$", ErrorMessage = "Enter 7 Number ")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [Required]
-        public string Re_Password { get; set; }
+        public string? Re_Password { get; set; }
         [Required(ErrorMessage = "Enter Your Phone Number")]
         [RegularExpression(@"^\d{11}$", ErrorMessage = "Enter 11 Number ")]
         public string Number { get; set; }

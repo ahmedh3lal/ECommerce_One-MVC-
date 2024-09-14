@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ECommerce_One</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min (1).css" />
     <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ECommerce_One.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ECommerce_One</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -24,16 +26,57 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact </a>
                         </li>
                           <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Services">Services</a>
                         </li>
                         </li>
                           <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Add_pro</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About US</a>
                         </li>
 
+                    </ul>
+                </div>
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- User Icon or Image -->
+                        @{
+                            // جلب البيانات من Session
+                            string? userId = Context.Session.GetString("SessionUserId");
+                            string? userName = Context.Session.GetString("SessionUserName");
+                            string? userImage = Context.Session.GetString("SessionUserImage");
+
+                            // صورة افتراضية في حال عدم وجود صورة للمستخدم
+                            string defaultImage = "/images/default-user.png"; // تأكد من وضع الصورة في هذا المسار
+                        }
+
+                        @if (!string.IsNullOrEmpty(userImage))
+                        {
+                            <!-- عرض صورة المستخدم إذا كانت موجودة -->
+                            <img src="@userImage" alt="User Image" class="rounded-circle" width="40" height="40">
+                        }
+                        else
+                        {
+                            <!-- عرض الصورة الافتراضية في حال عدم وجود صورة للمستخدم -->
+                            <img src="@Url.Content(defaultImage)" alt="Default User Image" class="rounded-circle" width="40" height="40">
+                        }
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        @if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(userId))
+                        {
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="Index" asp-route-id="@userId">Profile</a></li>
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="Update" asp-route-id="@userId">Settings</a></li>
+                        }
+                        else
+                        {
+                            <li><span class="dropdown-item">No user data available</span></li>
+                        }
+                        <li><a class="dropdown-item" asp-controller="User" asp-action="Logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,8 +87,7 @@
             @RenderBody()
         </main>
     </div>
-
-    
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

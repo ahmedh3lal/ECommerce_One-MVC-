@@ -1,0 +1,47 @@
+﻿@model List<Payment>
+<div class="text-right">
+    <a class="btn btn-primary" asp-area="" asp-controller="Payment" asp-action="Create" class="btn btn-success">Create New Payment Option</a>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card d-flex flex-column">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Name: @item.Name</h5>
+
+                        <a asp-action="Update" class="btn btn-outline-primary" asp-route-id="@item.Id">Update</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class=" btn btn-danger">Delete</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-img-top {
+            width: 15rem; /* عرض الصورة */
+            height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+            object-fit: cover; /* ملاءمة الصورة داخل الإطار */
+        }
+        .text-right {
+        text-align: right;
+    }
+
+</style>
